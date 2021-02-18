@@ -1,0 +1,15 @@
+
+
+      .btn{
+        border: none !important;
+        outline: none;
+        background-color: #303030 !important;
+        color: white !important; 
+
+      }
+
+
+a,a:active,a:hover,a:link,a:visited{
+  text-decoration: none;
+  margin-left: 60px !important;
+}
