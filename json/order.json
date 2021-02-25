@@ -1,0 +1,4 @@
+{"1":{"id":"1","customerName":"Vijaytha","status":"ordered","address":"XXX street, yyy building","totalCost":200,"totalItems":4,"date":""},
+"2":{"id":"2","customerName":"Vijaytha","status":"Payment pending","address":"XXX street, yyy building","totalCost":200,"totalItems":4,"date":""},
+"3":{"id":"3","customerName":"Vijaytha","status":"shipped","address":"XXX street, yyy building","totalCost":200,"totalItems":4,"date":""},
+"4":{"id":"4","customerName":"Vijaytha","status":"Delivered","address":"XXX street, yyy building","totalCost":200,"totalItems":4,"date":""}}

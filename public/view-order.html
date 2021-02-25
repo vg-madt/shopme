@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="js/manage-order.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    
+
+  </head>
+  <body onload="orderInUse()">
+    <div class="container" align="center">
+    <div class="row d-block" align="center">
+        <div class="col-lg-6 ml-4">
+          <h5>Order details</h5>
+          <form>
+            <div class="form-row" align ="left">
+              <div class="col-lg-12">
+                  <label for="orderId">Order ID</label>
+                <input disabled id ="orderId" type="name" value="" class="form-control h-60 mb-2 mt-1 p-3"/>
+              </div>
+            </div>
+            <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="customerName">Customer Name</label>
+                  <input disabled id ="customerName" type="name" class="form-control mb-2 h-60 mt-1 p-3"/>
+                </div>
+            </div>
+              <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="status">Order Status</label>
+                  <input disabled id ="status" type="name" class="form-control h-60 mt-1 p-3"/>
+                </div>
+              </div>
+              <div class="form-row w-100 h-60 mb-2 mt-3">
+                <div class="col-lg-12 ">
+              <select class="form-control" id="selector" hidden = true>
+                  <option>Ordered</option>
+                  <option>Payment Pending</option>
+                  <option>Shipped</option>
+                  <option>Delivered</option>
+            </select>
+              </div>
+              </div>
+              <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="address">Address</label>
+                  <textarea disabled id ="address" class="form-control h-80 mb-3 mt-1 p-3"></textarea>
+                </div>
+              </div>
+             <div class="form-row mt-1">
+              <div class="col-lg-6">
+                <input class="btn btn-dark w-100" type="button" value="Edit" onclick="editOrder()">
+              </div>
+              <div class="col-lg-6">
+                <input class="btn btn-dark w-100" type="button" value="Save" onclick="saveOrder()">
+              </div>
+              </div>
+          </form>
+        </div>
+      </div>
+      </div>
+
+  </body>
+</html>

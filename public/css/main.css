@@ -11,7 +11,9 @@ img.logo {
     width: 60px;
 }
 .navbar-fixed-top{
+    padding-top: 5px;
     background-color: #303030;
+    align-items:baseline;
     
 }
 
@@ -47,6 +49,7 @@ img.d-block w-100 {
     margin-left: 50px;
     height: 85%;
     width: 70%;
+    object-fit: cover;
 }
 
 .textColor {
@@ -61,14 +64,17 @@ a.textColor {
 .productName{
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 20px;
+    margin-left: -20px !important;
 
 }
 .content{
     align-self: center;
-    margin-left: 114px;
+
 }
-#price{
-    font-weight: 100;
+.price{
+    font-weight: 400;
     font-size: 20px;
     margin-top: 40px;
     margin-bottom: 20px;
@@ -101,6 +107,7 @@ a.navAnchor,a.navAnchor:active,a.navAnchor:link,a.navAnchor:visited,a.navAnchor:
     color: white !important;
     text-decoration: none !important;
     text-decoration-color: white;
+    margin-top: -8px;
     
   }
 
