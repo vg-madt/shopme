@@ -29,6 +29,9 @@ The application is composed of the following Features:
 * [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - Framework for building responsive sites.
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - Scripting language for DOM manipulation.
 
+**SCREENSHOTS:**
+
+![screencapture-localhost-5000-index-html-2021-03-01-21_43_56](https://user-images.githubusercontent.com/18254312/109589041-b9e0b200-7ad7-11eb-9f0b-f072b7df31fc.png)
 
 ---
 
