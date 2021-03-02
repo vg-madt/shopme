@@ -144,7 +144,7 @@ for (var key in categories)
       image.className = 'col-sm-1'
       var imageInput = document.createElement("img");
       imageInput.disabled = true;
-      imageInput.src='/img/dress1.jpg';
+      imageInput.src="getImage.action-"+product.id;;
       image.appendChild(imageInput);
       row.appendChild(image);
 
@@ -169,7 +169,18 @@ for (var key in categories)
       priceInput.disabled = true;
       price.appendChild(priceInput);
       row.appendChild(price);
-  
+
+
+    //   var atc = document.createElement("div");
+    // atc.className = 'col-sm-2'
+    // var atcBtn = document.createElement("input");
+    // atcBtn.type = 'button';
+    // atcBtn.id = 'atc'+product.name;
+    // atcBtn.className = 'btn btn-dark';
+    // atcBtn.value = 'Add to Cart';
+    // let atcFunction = atcProduct.bind(product);
+    // atcBtn.addEventListener('click', atcFunction);
+
       var edit = document.createElement("div");
     edit.className = 'col-sm-2'
     var editBtn = document.createElement("input");
@@ -220,6 +231,14 @@ for (var key in categories)
         window.location.href="add-product.html";
         //document.getElementById("categoryName").disabled=false;
       }
+
+      function atcProduct(){
+        console.log("Add To Cart clicked");
+        localStorage.setItem("currentProductId",this.id);
+        // window.location.href="add-product.html";
+        //document.getElementById("categoryName").disabled=false;
+      }
+
       function saveProduct(){
         var currentProductId = localStorage.getItem("currentProductId");
         var name = document.getElementById('name').value;
@@ -243,6 +262,8 @@ for (var key in categories)
         request.setRequestHeader('Content-type', 'application/json');
         console.log("product details ",product);
         request.send(JSON.stringify(product));
+        localStorage.removeItem("currentProductId");
+
         }else{
         request = new XMLHttpRequest();
         var url = 'addProduct.action';
@@ -257,13 +278,15 @@ for (var key in categories)
         request.setRequestHeader('Content-type', 'application/json');
         console.log("product details ",product);
         request.send(JSON.stringify(product));
+        localStorage.removeItem("currentProductId");
+
       }
 
 
         var p = JSON.parse(request.responseText);
         var pId = p.id;
         console.log("Product id in response: ",pId);
-
+if(image){
         request = new XMLHttpRequest();
         url = 'addImage.action?'+pId;
         request.open("POST", url, false);
@@ -272,11 +295,16 @@ for (var key in categories)
         //console.log("category details ",category);
         request.send(image);
         localStorage.removeItem("currentProductId");
+}
+  localStorage.removeItem("currentProductId");
+  window.alert("Product saved");
         
       }
 
 
       function removeProduct(){
+        //localStorage.removeItem("currentProductId");
+
         //var c = document.getElementById(this.name).value;
     var prod = this;
 
@@ -314,5 +342,6 @@ for (var key in categories)
         console.log("my image: ",image);   
         return image;
       }
+
       
       }

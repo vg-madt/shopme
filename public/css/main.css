@@ -16,6 +16,9 @@ img.logo {
     align-items:baseline;
     
 }
+#admin{
+    visibility: hidden;
+}
 
 .navbar {
     height: 60px;
@@ -23,6 +26,10 @@ img.logo {
 
 a.navbar-brand {
     font-weight: bold;
+}
+
+a.nav-link{
+cursor: pointer;
 }
 
 
@@ -46,7 +53,7 @@ img.d-block w-100 {
 .img-responsive {
     align-items: center;
     align-self: center;
-    margin-left: 50px;
+    margin-left: 30px !important;
     height: 85%;
     width: 70%;
     object-fit: cover;
@@ -110,4 +117,3 @@ a.navAnchor,a.navAnchor:active,a.navAnchor:link,a.navAnchor:visited,a.navAnchor:
     margin-top: -8px;
     
   }
-

@@ -1,8 +1,46 @@
 //var user="Guest";
 var products;
+var row;
+var totalCost;
+        var subTotal;
+        var hst;
+var currentUser;
 
 function loadAll(){
     populateCategory();
+    getProducts();
+    currentUser = localStorage.getItem("currentUserEmail");
+            console.log("current user: ",currentUser);
+            
+    if(currentUser){
+        if(currentUser === "admin"){
+            document.getElementById('admin').style.visibility="visible";
+        }
+        console.log("current user is logged in");
+        document.getElementById('currentUser').innerHTML = currentUser;
+        var request = new XMLHttpRequest();
+    var url = 'getCart.action&'+currentUser;
+    request.open("GET", url, false); 
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send();
+    var cart = JSON.parse(request.responseText);
+    console.log("cart value ->" ,cart);
+    if(cart.products.length != 0){
+    document.getElementById('cartValue').innerHTML=cart.totalCost.toFixed(2);
+    }    
+}else if(!currentUser){
+        console.log("current user is not logged in");
+        document.getElementById('currentUser').innerHTML = "Guest";
+        var first = document.getElementById('first');
+        first.innerHTML = "Login";
+        first.href = "login.html";
+        var second = document.getElementById('second');
+        second.innerHTML="Register";
+        second.href="register.html";
+        var third = document.getElementById('third');
+        third.innerHTML="View Cart";
+        third.href = "view-cart.html";
+    }
 }
 function populateCategory(){
     var request = new XMLHttpRequest();
@@ -30,12 +68,11 @@ function populateCategory(){
         ul.appendChild(listItem);
 
       }
-      var currentUser = localStorage.getItem("currentUserEmail");
-            console.log("current user: ",currentUser);
-            document.getElementById('currentUser').innerHTML = currentUser;
+      
 }
 
 function getProducts(){
+    clean();
     var category = this;
     var request = new XMLHttpRequest();
     var url = 'getProduct.action='+category.id;
@@ -46,25 +83,34 @@ function getProducts(){
     request.send();
     products = JSON.parse(request.responseText);
     var table = document.getElementById('table');
-    var row = document.getElementById('row');
+    row = document.createElement('div');
+    row.className = 'row';
+    row.id = 'row';
     for(key in products){
         var product=products[key];
+        console.log("Key: ", key, "; Product: ", product);
         var col = document.createElement('div');
         col.className = "col-md-4";
         var productContainer = document.createElement('div');
-        productContainer.className = "product ml-4";
+        productContainer.className = "product";
+        productContainer.style.marginLeft="40px";
         var image = document.createElement('img');
-        image.class="img-responsive";
+        image.class="img-responsive mb-4";
+        image.style.alignItems="center";
+        image.src = "getImage.action-"+product.id;
+        image.style.marginLeft="140px";
+        image.style.objectFit="cover";
+        image.style.height="160px";
         var src = getImage.bind(product);
         var col2 = document.createElement('div');
         col2.class="productName";
-        col2.style.align = "center";
+        col2.style.textAlign = "center";
         col2.innerHTML=product.name;
         var priceDiv = document.createElement('div');
         priceDiv.className = "col-md-10 ml-4";
-        priceDiv.style.align="center";
+        priceDiv.style.textAlign="center";
         var price = document.createElement('span');
-        price.className="price";
+        price.className="price p-3 mt-2";
         price.innerHTML="$ "+product.price;
         priceDiv.appendChild(price);
         var button = document.createElement('button');
@@ -134,13 +180,59 @@ function register(){
     customer.password = password1;
 
     request.setRequestHeader('Content-type', 'application/json');
-    console.log("custoner details ",customer);
+    //console.log("custoner details ",customer);
     request.send(JSON.stringify(customer));
-    console.log("before my alert");
+    //console.log("before my alert");
     alert("Successfully Registered");
     window.location.href = "login.html";
 
     }
+}
+
+function addToCart() {
+    var product = this;
+    var get = new XMLHttpRequest();
+    var currentUser = localStorage.getItem("currentUserEmail");
+    console.log("Current user adding to the cart: ",currentUser);
+    var url = 'getCart.action&'+currentUser;
+    console.log("Cart url: ", url);
+    get.open("GET", url, false);
+    get.send();
+    var cart = JSON.parse(get.responseText);
+    if (cart === undefined) {
+        cart = {};
+        cart.products = [];
+    }else if(cart.products.length===0){
+        totalCost=0;
+        subTotal=0;
+        hst=0;
+
+    }else if(cart.products.length>0){
+        totalCost=cart.totalCost;
+        subTotal=cart.subTotal;
+        hst=cart.hst;
+    }
+    console.log("Cart:  ", cart);
+    var post = new XMLHttpRequest();
+    url = 'addCart.action&'+currentUser;
+    post.open("POST", url, false);
+    post.setRequestHeader('Content-type', 'application/json');
+    console.log("product details ",product);
+    cart.products.push(product.id);
+    subTotal += parseFloat(product.price);
+    console.log("subtotal: ",subTotal);
+    cart.subTotal = subTotal;
+    hst += parseFloat(product.price)*0.13;
+    cart.hst = hst;
+    totalCost=(subTotal+hst);
+    console.log("hst -> ",hst);
+    //console.log("subtotal -> ",subTotal);
+    console.log("total cost -> ",totalCost);
+    //var cost = totalCost+(totalCost*0.13);
+    cart.totalCost = totalCost;
+    document.getElementById('cartValue').innerHTML=totalCost.toFixed(2);
+    post.send(JSON.stringify(cart));
+    //setTimeout(function(){ alert("Added to Cart"); }, 3000);
 }
 
 function checkPassword(password1,password2){
@@ -195,12 +287,74 @@ function login(){
     }
 }
 
-function getCurrentUser(){
-    document.getElementById("currentUser").innerHTML=user;
-}
-
 function clearUser(){
-    localStorage.setItem("currentUserEmail","Guest");
-
+    localStorage.removeItem("currentUserEmail");
+    document.getElementById('currentUser').innerHTML='Guest';
     window.location.href="index.html";
 }
+
+function clean(){
+    if(row){
+      var element = document.getElementById("row");
+      element.remove();
+    }
+  }
+
+  function searchProduct(){
+      var value = document.getElementById('search').value;
+      var request = new XMLHttpRequest();
+    var url = 'getProduct.action*'+value;
+    request.open("GET", url, false);
+
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send();
+    clean();
+    var products = JSON.parse(request.responseText);
+    var table = document.getElementById('table');
+    row = document.createElement('div');
+    row.className = 'row';
+    row.id = 'row';
+    for(key in products){
+        var product=products[key];
+        console.log("Key: ", key, "; Product: ", product);
+        var col = document.createElement('div');
+        col.className = "col-md-4";
+        var productContainer = document.createElement('div');
+        productContainer.className = "product";
+        productContainer.style.marginLeft="40px";
+        var image = document.createElement('img');
+        image.class="img-responsive mb-4";
+        image.style.alignItems="center";
+        image.src = "getImage.action-"+product.id;
+        image.style.marginLeft="140px";
+        image.style.objectFit="cover";
+        image.style.height="160px";
+        var src = getImage.bind(product);
+        var col2 = document.createElement('div');
+        col2.class="productName";
+        col2.style.textAlign = "center";
+        col2.innerHTML=product.name;
+        var priceDiv = document.createElement('div');
+        priceDiv.className = "col-md-10 ml-4";
+        priceDiv.style.textAlign="center";
+        var price = document.createElement('span');
+        price.className="price p-3 mt-2";
+        price.innerHTML="$ "+product.price;
+        priceDiv.appendChild(price);
+        var button = document.createElement('button');
+        button.className="btn btn-primary ml-8";
+        var icon = document.createElement('i');
+        icon.className="fa fa-shopping-cart";
+        button.innerHTML="Add";
+        button.onclick=addToCart.bind(product);
+        button.appendChild(icon);
+        priceDiv.appendChild(button);
+        productContainer.appendChild(image);
+        productContainer.appendChild(col2);
+        productContainer.appendChild(priceDiv);
+        col.appendChild(productContainer);
+        row.appendChild(col);
+    }   
+    table.appendChild(row); 
+
+  }

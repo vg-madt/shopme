@@ -27,32 +27,32 @@
                 <div class="col-md-4">
 
                 </div>
-                    <a href="login.html" class="navAnchor nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Account</a>
+                    <a href="" class="navAnchor nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Account</a>
             
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="login.html">Login</a>
-                    <a class="dropdown-item" href="customer-order.html">View Orders</a>
+                <div id='loggedIn' class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a id = 'first' class="dropdown-item" href="view-cart.html">View Cart</a>
+                    <a id ='second' class="dropdown-item" href="check-order-status.html">View Orders</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" onclick="clearUser()">Sign out</a>
+                    <a id = 'third' class="dropdown-item" href="#" onclick="clearUser()">Sign out</a>
                   </div>
-                <div class="col-md-0"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart - $0.00</div>
-                <div class="col-md-1" id="admin"></div>
+                <div class="col-md-0"><a class ="navAnchor" href="view-cart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart - $<span id='cartValue'>0.00</span></div></a>
+                <div class="col-md-1" id="admin"><a class="navAnchor" href="admin.html">Admin</a></div>
             </div>
         </div>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand textColor" href="#"><img src="img/logo.png" class="logo" />Shopme.ca</a>
+        <a class="navbar-brand textColor" href="index.html"><img src="img/logo.png" class="logo" />Shopme.ca</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto" id="categoryList">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">All Products </a>
+                    <a class="nav-link" href="#" onclick="getProducts(); return false;">All Products </a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-3 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="false"></i></button>
+                <input id = "search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-3 my-sm-0" type="button" onclick="searchProduct()"><i class="fa fa-search" aria-hidden="false"></i></button>
             </form>
         </div>
     </nav>
@@ -104,8 +104,6 @@
 
 
     <div id ="table">
-    <div id = "row" class="row">
-    </div>
     </div>
 
 

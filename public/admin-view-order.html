@@ -27,12 +27,25 @@
                 <input disabled id ="orderId" type="name" value="" class="form-control h-60 mb-2 mt-1 p-3"/>
               </div>
             </div>
+            <div class="form-row" align ="left">
+              <div class="col-lg-12">
+                  <label for="orderDate">Order Date</label>
+                <input disabled id ="orderDate" type="name" value="" class="form-control h-60 mb-2 mt-1 p-3"/>
+              </div>
+            </div>
             <div class="form-row" align="left">
                 <div class="col-lg-12">
                     <label for="customerName">Customer Name</label>
                   <input disabled id ="customerName" type="name" class="form-control mb-2 h-60 mt-1 p-3"/>
                 </div>
             </div>
+            <div class="form-row" align="left">
+              <div class="col-lg-12">
+                  <label for="customerEmail">Customer Email</label>
+                <input disabled id ="customerEmail" type="name" class="form-control mb-2 h-60 mt-1 p-3"/>
+              </div>
+          </div>
+         
               <div class="form-row" align="left">
                 <div class="col-lg-12">
                     <label for="status">Order Status</label>
@@ -41,7 +54,7 @@
               </div>
               <div class="form-row w-100 h-60 mb-2 mt-3">
                 <div class="col-lg-12 ">
-              <select class="form-control" id="selector" hidden = true>
+              <select onchange="selectorValue()" class="form-control" id="selector" hidden = true>
                   <option>Ordered</option>
                   <option>Payment Pending</option>
                   <option>Shipped</option>
@@ -53,6 +66,30 @@
                 <div class="col-lg-12">
                     <label for="address">Address</label>
                   <textarea disabled id ="address" class="form-control h-80 mb-3 mt-1 p-3"></textarea>
+                </div>
+              </div>
+              <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="postalCode">Postal Code</label>
+                  <textarea disabled id ="postalCode" class="form-control h-80 mb-3 mt-1 p-3"></textarea>
+                </div>
+              </div>
+              <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="phoneNumber">Phone Number</label>
+                  <input disabled id ="phoneNumber" class="form-control h-80 mb-3 mt-1 p-3"></textarea>
+                </div>
+              </div>
+              <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="totalItems">Total Items</label>
+                  <input disabled id ="totalItems" type="name" class="form-control mb-2 h-60 mt-1 p-3"/>
+                </div>
+            </div>
+              <div class="form-row" align="left">
+                <div class="col-lg-12">
+                    <label for="totalCost">Total Cost</label>
+                  <input disabled id ="totalCost" class="form-control h-80 mb-3 mt-1 p-3"></textarea>
                 </div>
               </div>
              <div class="form-row mt-1">

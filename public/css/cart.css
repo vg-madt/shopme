@@ -1,0 +1,37 @@
+img{
+    height: 50px;
+    width: 40px;
+}
+.row{
+    margin-bottom: 10px;
+
+}
+p{
+    margin-top: 30px !important;
+    text-align: left;
+    font-size: 30px;
+    padding-left: 10px;
+}
+.total{
+    margin-top: 10px;
+    position: fixed;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 300;
+}
+.close{
+    height: 28px;
+    width: 28px;
+    border: none;
+    color: blue;
+    margin-top: 24px;
+}
+.close:hover{
+    background-color: palevioletred;
+    color: wheat;
+}
+
+a.back{
+    font-size: 20px;
+    text-decoration: none;
+}
