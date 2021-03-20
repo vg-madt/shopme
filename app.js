@@ -24,7 +24,7 @@ const server = http.createServer((req, res) => {
     var imagePid = pathIId[1];
     var pathUId=path.split("&");
     var userId = pathUId[1];
-    var OID = path.split("!")[1];
+    var UID = path.split("!")[1];
     var data;
     if(path ==""){
         //console.log("calling my index.html");
@@ -154,88 +154,6 @@ const server = http.createServer((req, res) => {
 
     let type;
     switch(path){
-        case "css/main.css":
-            console.log("setting main.css header ",path)
-            res.setHeader("Content-type","text/css");
-            break;
-        case "css/admin.css":
-            console.log("setting main.css header ",path)
-            res.setHeader("Content-type","text/css");
-            break;
-        case "constants/colors.css":
-            res.setHeader("Content-type","text/css");
-            break;
-        case "css/cart.css":
-            res.setHeader("Content-type","text/css");
-            break;
-        case "js/main.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;
-        case "js/admin.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;
-        case "js/product.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;
-        case "js/cart.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;   
-        case "js/checkOrder.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;    
-        case "js/manage-order.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;
-        case "js/customer-info.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;
-        case "js/sales.js":
-            res.writeHead(200,{"Content-type":"application/javascript"});
-            break;
-        case "index.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "login.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "register.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "admin.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "sales.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "product.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "orders.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "add-product.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "view-cart.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "manage-order.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "customer-info.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "admin-view-order.html":
-        //+"?"+curOrder:
-            //file = 'view-order.html';
-            res.setHeader("Content-type","text/html");
-            break;
-        case "admin-view-customer-order.html":
-            res.setHeader("Content-type","text/html");
-            break;
-        case "check-order-status.html":
-            res.setHeader("Content-type","text/html");
-            break;
         case "getCategory.action":
             file = 'json/category.json';
             res.setHeader("Content-type","application/json");
@@ -261,6 +179,11 @@ const server = http.createServer((req, res) => {
             res.setHeader("Content-type","application/json");
             break;
         case "getOrder.action":
+            file = 'json/order.json';
+            console.log("getting orders");
+            res.setHeader("Content-type","application/json");
+            break;
+        case "getOrders!"+UID:
             file = 'json/order.json';
             console.log("getting orders");
             res.setHeader("Content-type","application/json");
@@ -352,6 +275,18 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify(obj));
         // }else if(imagePid){
         //     res.end(file);
+        }else if(UID){
+            var orders = JSON.parse(content);
+            var order;
+            var result=[];
+            Object.values(orders).forEach(obj => {
+                if(obj.customerEmail === UID){
+                    order = obj;
+                    result.push(order);
+                }
+            });
+            res.end(JSON.stringify(result));
+        
         } else if (userId) {
             console.log("adding to cart");
             var carts = JSON.parse(content);
